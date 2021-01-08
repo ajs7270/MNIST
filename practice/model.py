@@ -33,12 +33,12 @@ class ImageClassifier(nn.Module):
                 nn.Softmax(dim=-1),
             )
 
-        def forward(self, x):
-            # |x| = (batch_size , input_size)
-            # |y| = (batch_size , output_size)
-            y = self.layers(x)
+    def forward(self, x):
+        # |x| = (batch_size , input_size)
+        # |y| = (batch_size , output_size)
+        y = self.layers(x)
 
-            return y
+        return y
 
 
 

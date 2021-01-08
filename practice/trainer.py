@@ -4,7 +4,7 @@ import numpy as np
 
 import torch
 import torch.nn.functional as F
-import torch.optim as opim
+import torch.optim as optim
 
 class Trainer():
 
@@ -35,7 +35,7 @@ class Trainer():
             # 학습을 수행
             # Initialize the grandients of the model.
             self.optimizer.zero_grad()
-            less_i.backward()
+            loss_i.backward()
 
             self.optimizer.step()
 
@@ -78,7 +78,7 @@ class Trainer():
         for epoch_index in range(config.n_epochs):
             # train_data[0] : data , train_data[1] : label
             train_loss = self._train(train_data[0], train_data[1],config)
-            valid_data = slef._validate(valid_data[0], valid_data[1], config)
+            valid_loss = self._validate(valid_data[0], valid_data[1], config)
 
             # You must use deep copy to take a snapshot of current best weights.
             if valid_loss <= lowest_loss:
@@ -87,7 +87,7 @@ class Trainer():
 
             print("Epoch(%d/%d): train_loss=%.4e  valid_loss=%.4e  lowest_loss=%.4e" % (
                 epoch_index + 1,
-                config.n_epoches,
+                config.n_epochs,
                 train_loss,
                 valid_loss,
                 lowest_loss,

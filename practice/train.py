@@ -39,8 +39,9 @@ def main(config):
     valid_cnt = x.size(0) - train_cnt
 
     # Shuffle dataest to split into train/valid set.
-    indice = torch.randperm(x.size(0))
+    indices = torch.randperm(x.size(0))
     x = torch.index_select(x,dim=0,index=indices).to(device).split([train_cnt, valid_cnt], dim=0)
+    y = torch.index_select(y,dim=0,index=indices).to(device).split([train_cnt, valid_cnt], dim=0)
 
     print("Train:", x[0].shape, y[0].shape)
     print("Valid:", x[1].shape, y[1].shape)
